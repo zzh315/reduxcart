@@ -1,8 +1,8 @@
-import Card from '../UI/Card';
-import classes from './ProductItem.module.css';
+import Card from "../UI/Card";
+import classes from "./ProductItem.module.css";
 
 const ProductItem = (props) => {
-  const { title, price, description } = props;
+  const { title, price, description, onAddCart } = props;
 
   return (
     <li className={classes.item}>
@@ -13,7 +13,7 @@ const ProductItem = (props) => {
         </header>
         <p>{description}</p>
         <div className={classes.actions}>
-          <button>Add to Cart</button>
+          <button onClick={onAddCart}>Add to Cart</button>
         </div>
       </Card>
     </li>
