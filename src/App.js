@@ -3,7 +3,8 @@ import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { sendCartData } from "./store/cart-slice";
+import { sendCartData } from "./store/cart-actions";
+import { fetchCartData } from "./store/cart-actions";
 import Notification from "./components/UI/Notification";
 
 let isInitial = true;
@@ -58,14 +59,17 @@ function App() {
   // }, [cart, dispatch]);
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
     }
-    dispatch(sendCartData(cart));
+
     // the Action creater in cart-slice.js create sendCartData function and will return a fucntion that can be a parameter of this dispatch here, and this dispatch will pass the dispatch function to the returnd funciton
     // this way have extra steps but will keep app.js here cleaner
   }, [cart, dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
 
   return (
     <Fragment>
