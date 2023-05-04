@@ -22,7 +22,6 @@ const Products = (props) => {
 
   const addCartHandler = (product) => {
     dispatch(cartActions.addItemsToCart(product));
-    console.log("in products", product);
   };
 
   return (
